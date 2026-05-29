@@ -2,6 +2,7 @@ import { NavLink } from 'react-router';
 import icon from '../../assets/icons/icon';
 import { logo } from '../../assets/images';
 import { useState } from 'react';
+import { useAuth } from '../../contexts/auth/AuthContextprovider';
 
 const menu = [
   { title: 'Home', link: '/' },
@@ -13,6 +14,8 @@ const menu = [
 
 const Navbar = () => {
   const [isOpen, setIsopen] = useState(false);
+  const { user } = useAuth();
+
   return (
     <>
       <header className="w-full   border-b border-b-[#ddd]/90 bg-pale-grey backdrop-blur-3xl  top-0 left-0 right-0  fixed z-50">
@@ -40,9 +43,17 @@ const Navbar = () => {
           <div className=" text-xl text-deep-aqua flex gap-4 items-center">
             <div>{icon.search}</div>
             <NavLink to={'/cart'}>{icon.cart}</NavLink>
-            <NavLink className="text-[18px]" to={'/my-account'}>
-              {icon.user}
-            </NavLink>
+
+            {user ? (
+              <NavLink className="text-[18px]" to={'/my-account'}>
+                {icon.user}
+              </NavLink>
+            ) : (
+              <NavLink className="text-[18px]" to={'/login'}>
+                {icon.logIn}
+              </NavLink>
+            )}
+
             <div onClick={() => setIsopen(prev => !prev)} className="md:hidden">
               {icon.menu}
             </div>

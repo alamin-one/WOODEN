@@ -4,6 +4,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import MainLayout from './layout/MainLayout';
 import { Outlet } from 'react-router';
+import AuthContextprovider from './contexts/auth/AuthContextprovider';
 
 function App() {
   useEffect(() => {
@@ -14,10 +15,12 @@ function App() {
   }, []);
   return (
     <>
-      <Toaster position="top-center" reverseOrder={true} />
-      <MainLayout>
-        <Outlet />
-      </MainLayout>
+      <AuthContextprovider>
+        <Toaster position="top-center" reverseOrder={true} />
+        <MainLayout>
+          <Outlet />
+        </MainLayout>
+      </AuthContextprovider>
     </>
   );
 }

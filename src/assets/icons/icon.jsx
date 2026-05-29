@@ -16,6 +16,8 @@ import { TbLogout } from 'react-icons/tb';
 import { IoMdSettings } from 'react-icons/io';
 import { MdOutlineWork } from 'react-icons/md';
 import { FaPlus } from 'react-icons/fa';
+import { FaGoogle } from 'react-icons/fa';
+import { IoLogIn } from 'react-icons/io5';
 
 const icon = {
   user: <FaUser />,
@@ -36,6 +38,8 @@ const icon = {
   seting: <IoMdSettings />,
   work: <MdOutlineWork />,
   pluse: <FaPlus />,
+  google: <FaGoogle />,
+  logIn: <IoLogIn />,
 };
 
 export default icon;

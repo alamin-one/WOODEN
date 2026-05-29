@@ -4,7 +4,7 @@ import OrdertabileDesktop from './OrdertabileDesktop';
 
 function StatCard({ label, value, sub }) {
   return (
-    <div className="bg-white rounded-2xl border border-gray-100 p-5 flex flex-col gap-1 shadow-sm">
+    <div className=" rounded-2xl border border-deep-aqua/20 p-5 flex flex-col gap-1 ">
       <span className="text-[11px] font-semibold tracking-widest text-gray-400 uppercase">
         {label}
       </span>

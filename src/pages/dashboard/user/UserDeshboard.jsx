@@ -1,7 +1,10 @@
 import { NavLink, Outlet } from 'react-router';
 import icon from '../../../assets/icons/icon';
+import { useAuth } from '../../../contexts/auth/AuthContextprovider';
 
 const UserDeshboard = () => {
+  const { user, signOutFN } = useAuth();
+
   const userDash = [
     { title: 'Dashboard', icon: icon.dashboard, path: '/my-account/dashboard' },
     { title: 'My Orders', icon: icon.user, path: '/my-account/orders' },
@@ -9,6 +12,14 @@ const UserDeshboard = () => {
     { title: 'Addresses', icon: icon.location, path: '/my-account/addresses' },
     { title: 'Settings', icon: icon.seting, path: '/my-account/settings' },
   ];
+  const capitalize = str => str?.charAt(0).toUpperCase();
+  const firstLetter = capitalize(
+    user?.displayName ? user?.displayName : '!',
+  );
+
+  const photoURL = user?.photoURL
+    ? user.photoURL
+    : `https://placehold.co/100x100/0094AD/FFFFFF?text=${firstLetter}`;
 
   return (
     <>
@@ -19,15 +30,13 @@ const UserDeshboard = () => {
             <div className="w-full m-h-80 rounded-md bg-white border border-pale-grey">
               <div className="flex gap-2 p-4 border-b border-deep-aqua/20 bg-pale-grey">
                 {' '}
-                <img
-                  src="https://placehold.co/100x100/000000/FFFFFF?text=Coming+Soon"
-                  alt=""
-                  className="rounded-full w-10 h-10"
-                />
+                <img src={photoURL} alt="" className="rounded-full w-10 h-10" />
                 <span>
-                  <p className="text-md font-bold text-deep-aqua">Alamin</p>
-                  <p className="text-xs text-gray-400 leading-0 mt-1 wrap-break-word">
-                    example@gmail.com
+                  <p className="text-md font-bold text-deep-aqua">
+                    {user?.displayName}
+                  </p>
+                  <p className="text-xs text-gray-400 leading-3 mt-1 break-all">
+                    {user?.email}
                   </p>
                 </span>
               </div>
@@ -44,7 +53,10 @@ const UserDeshboard = () => {
                   </NavLink>
                 ))}
 
-                <div className="flex justify-start items-center gap-1 px-3 py-2 border-b text-gray-500 text-[14px] border-gray-100 rounded-md bg-white hover:bg-[#E7F5F3] cursor-pointer ">
+                <div
+                  onClick={signOutFN}
+                  className="flex justify-start items-center gap-1 px-3 py-2 border-b text-gray-500 text-[14px] border-gray-100 rounded-md bg-white hover:bg-[#E7F5F3] cursor-pointer "
+                >
                   {icon.logOup} Logout
                 </div>
               </div>
@@ -53,7 +65,6 @@ const UserDeshboard = () => {
           {/* content */}
           <div className="w-full h-screen bg-white">
             <Outlet />
-            
           </div>
         </div>
       </section>
