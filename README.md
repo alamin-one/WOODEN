@@ -232,12 +232,9 @@ Home
 
 
 # Cliend frontend
-1. Header or any nav array or object rakha better. EXAMPLE:: headerNav = [
-   {title:"Home",link:'/'}, {title:"Shop",link:'/shop'}, ]
-
 2. Toster => Toster holo je Notification => eita auto notification dekhai apni
    cal korben ar auto notification dekhabe. \*\*\* npm install react-hot-toast
    \*\* import {Toaster } from 'react-hot-toast'<Toaster position="top-right" />
-
+  # data-aos="fade-right">
 3. search suggestion => all data theke finter . tolowarcase . includes . slide 
 

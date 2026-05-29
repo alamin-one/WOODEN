@@ -1,14 +1,24 @@
+import { useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import MainLayout from './layout/MainLayout';
+import { Outlet } from 'react-router';
 
 function App() {
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: true,
+    });
+  }, []);
   return (
-    <div>
+    <>
       <Toaster position="top-center" reverseOrder={true} />
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam earum
-      autem repellendus, ipsum at nulla iste exercitationem doloribus fuga
-      numquam inventore ut aspernatur delectus consequatur asperiores quas
-      repellat repudiandae? Deserunt.
-    </div>
+      <MainLayout>
+        <Outlet />
+      </MainLayout>
+    </>
   );
 }
 
