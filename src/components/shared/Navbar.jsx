@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router';
+import { Link, NavLink } from 'react-router';
 import icon from '../../assets/icons/icon';
 import { logo } from '../../assets/images';
 import { useState } from 'react';
@@ -18,18 +18,20 @@ const Navbar = () => {
 
   return (
     <>
-      <header className="w-full   border-b border-b-[#ddd]/90 bg-pale-grey backdrop-blur-3xl  top-0 left-0 right-0  fixed z-50">
+      <header className="w-full border-b border-b-[#ddd]/90 bg-pale-grey backdrop-blur-3xl  top-0 left-0 right-0  fixed z-50">
         <div className=" max-w-7xl mx-auto px-5 py-2.5 flex justify-between items-center">
           {/* logo */}
+          <Link to={'/'}>
           <div className="">
             <img src={logo} alt="logo" className="w-12" />
           </div>
+          </Link>
           {/* desktop menu */}
           <div className=" hidden md:flex  gap-6">
             {menu.map((mItem, mIndex) => (
               <NavLink to={mItem.link} key={mIndex}>
                 {({ isActive }) => (
-                  <div className="text-[16px] text-Almost-black group cursor-pointer">
+                  <div className="text-[14px] text-gray-500 group cursor-pointer">
                     {mItem.title}
                     <div
                       className={`h-0.5 bg-deep-aqua rounded-full ${isActive ? 'w-full' : 'w-0 group-hover:w-full'} transition-all duration-300`}

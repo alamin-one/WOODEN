@@ -5,6 +5,7 @@ import 'aos/dist/aos.css';
 import MainLayout from './layout/MainLayout';
 import { Outlet } from 'react-router';
 import AuthContextprovider from './contexts/auth/AuthContextprovider';
+import DbContextprovider from './contexts/dB/DbContextprovider';
 
 function App() {
   useEffect(() => {
@@ -16,10 +17,12 @@ function App() {
   return (
     <>
       <AuthContextprovider>
-        <Toaster position="top-center" reverseOrder={true} />
-        <MainLayout>
-          <Outlet />
-        </MainLayout>
+        <DbContextprovider>
+          <Toaster position="top-center" reverseOrder={true} />
+          <MainLayout>
+            <Outlet />
+          </MainLayout>
+        </DbContextprovider>
       </AuthContextprovider>
     </>
   );

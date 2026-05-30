@@ -11,15 +11,15 @@ const OfferSection = () => {
             <h2>Flat 30% off limited time offer!</h2>
 
             <div className="flex flex-rows gap-5 my-5 ">
-              <div className="p-2 px-10 border border-gray-300 rounded-sm">
+              <div className="p-2 px-5 border border-gray-300 rounded-sm">
                 <p className="text-deep-aqua text-3xl">00</p>
                 <p className="text-deep-aqua text-[12px]">Days</p>
               </div>
-              <div className="p-2 px-10 border border-gray-300 rounded-sm">
+              <div className="p-2 px-5 border border-gray-300 rounded-sm">
                 <p className="text-deep-aqua text-3xl">00</p>
                 <p className="text-deep-aqua text-[12px]">Days</p>
               </div>
-              <div className="p-2 px-10 border border-gray-300 rounded-sm">
+              <div className="p-2 px-5 border border-gray-300 rounded-sm">
                 <p className="text-deep-aqua text-3xl">00</p>
                 <p className="text-deep-aqua text-[12px]">Days</p>
               </div>
