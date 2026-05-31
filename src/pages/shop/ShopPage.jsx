@@ -52,7 +52,11 @@ const ShopPage = () => {
                 {!error &&
                   !loading &&
                   isScroll.map((pItem, pIndex) => (
-                    <Link key={pIndex} to={`/singleproduct/${pItem.id}`}>
+                    <Link
+                      key={pIndex}
+                      to={`/singleproduct/${pItem.id}`}
+                      state={{ pItem }}
+                    >
                       <ProductItem pItem={pItem} />
                     </Link>
                   ))}

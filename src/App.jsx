@@ -6,6 +6,7 @@ import MainLayout from './layout/MainLayout';
 import { Outlet } from 'react-router';
 import AuthContextprovider from './contexts/auth/AuthContextprovider';
 import DbContextprovider from './contexts/dB/DbContextprovider';
+import QntyCtrlProvider from './contexts/qnty/QntyCtrlProvider';
 
 function App() {
   useEffect(() => {
@@ -18,10 +19,12 @@ function App() {
     <>
       <AuthContextprovider>
         <DbContextprovider>
-          <Toaster position="top-center" reverseOrder={true} />
-          <MainLayout>
-            <Outlet />
-          </MainLayout>
+          <QntyCtrlProvider>
+            <Toaster position="top-center" reverseOrder={true} />
+            <MainLayout>
+              <Outlet />
+            </MainLayout>
+          </QntyCtrlProvider>
         </DbContextprovider>
       </AuthContextprovider>
     </>

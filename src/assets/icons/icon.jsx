@@ -19,6 +19,8 @@ import { FaPlus } from 'react-icons/fa';
 import { FaGoogle } from 'react-icons/fa';
 import { IoLogIn } from 'react-icons/io5';
 import { VscSettings } from 'react-icons/vsc';
+import { IoIosStarOutline } from 'react-icons/io';
+import { IoIosStar } from 'react-icons/io';
 
 const icon = {
   user: <FaUser />,
@@ -42,6 +44,8 @@ const icon = {
   google: <FaGoogle />,
   logIn: <IoLogIn />,
   filter: <VscSettings />,
+  starB: <IoIosStarOutline className='text-yellow-300' />,
+  starF: <IoIosStar  className='text-yellow-600'/>,
 };
 
 export default icon;

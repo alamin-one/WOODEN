@@ -1,7 +1,18 @@
-import { collection, getDocs, getFirestore } from 'firebase/firestore';
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  getFirestore,
+  increment,
+  setDoc,
+  updateDoc,
+} from 'firebase/firestore';
 import app from '../../firebase';
 import { useContext, useEffect, useState } from 'react';
 import dbContext from './dbContext';
+import { useAuth } from '../auth/AuthContextprovider';
+import toast from 'react-hot-toast';
 /* custom hook */
 // eslint-disable-next-line react-refresh/only-export-components
 export const useDbcontext = () => {
@@ -17,7 +28,11 @@ const DbContextprovider = ({ children }) => {
   const [catLoading, setCatLoading] = useState(true);
   const [catError, setCatError] = useState(false);
   const [category, setCategory] = useState(null);
+
+
   const db = getFirestore(app);
+  const { user } = useAuth();
+  const userID = user?.uid;
 
   /* get all Products FN*/
   useEffect(() => {
@@ -41,7 +56,6 @@ const DbContextprovider = ({ children }) => {
   }, [db]);
 
   /* get all Category */
-
   useEffect(() => {
     const category = async () => {
       try {
@@ -63,6 +77,31 @@ const DbContextprovider = ({ children }) => {
     category();
   }, [db]);
 
+  /*  add cart FN */
+  const adToCartFN = async product => {
+    let docRef = doc(db, 'users', userID, 'cart', product.id);
+    const snapshort = await getDoc(docRef);
+
+    if (snapshort.exists()) {
+      toast.error('Product Already Added, Quantity Updated!');
+      await updateDoc(docRef, {
+        quantity: increment(1),
+      });
+    } else {
+      toast.success('Product Add Success');
+      await setDoc(docRef, {
+        title: product.title,
+        price: product.price,
+        discountPrice: product.discountPrice,
+        category: product.category,
+        brand: product.brand,
+        quantity: 1,
+        thumbnail: product.thumbnail,
+        colors: product.colors,
+      });
+    }
+  };
+
   /* provide value */
   const value = {
     error,
@@ -71,6 +110,7 @@ const DbContextprovider = ({ children }) => {
     catError,
     catLoading,
     category,
+    adToCartFN,
   };
   return <dbContext.Provider value={value}>{children}</dbContext.Provider>;
 };

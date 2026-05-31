@@ -186,6 +186,23 @@ wishlist
 
 
 
+
+
+
+## categori sturcture
+users/
+  {userId}/
+    cart/
+      {productId}/
+        productId: "9SBfNBJz9PZPO2OitNDW"
+        title: "Caramel Leather Bean Bag"
+        thumbnail: "https://..."
+        price: 25000
+        discountPrice: 20999
+        quantity: 2
+        color: "caramel"
+        addedAt: Timestamp
+
 ## Important Features
 1. User Side
 2. Add to cart

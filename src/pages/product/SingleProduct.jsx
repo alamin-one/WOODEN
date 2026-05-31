@@ -1,8 +1,20 @@
-import { Link } from 'react-router';
+import { useLocation, useParams } from 'react-router';
 import Button from '../../components/ui/Button';
 import QntyCtrl from '../cart/QntyCtrl';
+import rating from '../../utils/Rating';
+import { useDbcontext } from '../../contexts/dB/DbContextprovider';
 
 const SingleProduct = () => {
+  const { products, adToCartFN } = useDbcontext();
+  const { state } = useLocation();
+  const { id } = useParams();
+  const product = state?.pItem || products?.find(f => f.id === id);
+  const ratings = rating(product?.rating);
+
+  console.log(id);
+
+  /*  */
+  if (!product) return <div className="app-container  py-25 h-screen" >Loading...</div>;
   return (
     <>
       <section>
@@ -12,57 +24,73 @@ const SingleProduct = () => {
             {/* box one */}
             <div className="w-full sm:w-[50%]">
               <img
-                src="img/furniture03.png.png.png"
+                src={product.thumbnail}
                 alt=""
-                className="w-full h-full max-h-125 md:max-h-125"
+                className="w-full h-full max-h-125 md:max-h-125 border-2 rounded-2xl border-deep-aqua/10"
               />
-              <div className="grid grid-cols-4">
-                <div className="w-20 h-20 bg-green-50"></div>
-                <div className="w-20 h-20 bg-green-50"></div>
-                <div className="w-20 h-20 bg-green-50"></div>
+              <div className="mt-4 flex gap-2 justify-end">
+                {product?.images.map((pItem, pIndex) => (
+                  <div
+                    key={pIndex}
+                    className="w-25 h-25 bg-pale-grey rounded-2xl overflow-hidden!"
+                  >
+                    <img
+                      src={pItem}
+                      alt={pIndex}
+                      className="w-full h-full border rounded-2xl border-deep-aqua/20 hover:border-deep-aqua"
+                    />
+                  </div>
+                ))}
               </div>
             </div>
 
             {/* box two */}
             <div className="w-full sm:w-[50%] flex flex-col justify-center items-start ">
               <div>
-                <h2 className="">Papasan Chair</h2>
+                <h2 className="">{product.title}</h2>
                 <div className="flex gap-5">
-                  <p className="text-[14px]">
-                    rating:<span className="text-Deep-aqua"> 3.0</span>
+                  <p className="text-[14px] flex items-center gap-2">
+                    rating:
+                    <span className="text-Deep-aqua flex gap-1 text-md">
+                      {ratings}{' '}
+                    </span>
                   </p>
                   <p className="text-[14px]">
-                    reviews:<span className="text-Deep-aqua"> 214</span>
+                    reviews:
+                    <span className="text-Deep-aqua"> {product.reviews}</span>
                   </p>
                 </div>
 
                 <h6 className="mt-3 text-3xl text-deep-aqua font-bold">
-                  $120.00
+                  {product.price}৳
                 </h6>
                 <p className="text-[14px]">
                   stock:
-                  <span className="text-deep-aqua"> 20</span>
+                  <span className="text-deep-aqua"> {product.stock}</span>
                 </p>
               </div>
-              <Button className="mt-8 mb-2">
-                <Link>AddToCart</Link>
+              <Button onClick={() => adToCartFN(product)} className="mt-8 mb-2">
+                AddToCart
               </Button>
               <div className="flex gap-4 items-center">
-                <QntyCtrl />
+                <QntyCtrl product={product} />
                 <p className="text-[14px]">
                   stock:
-                  <span className="text-deep-aqua"> 20</span>
+                  <span className="text-deep-aqua"> {product.stock}</span>
                 </p>
               </div>
               <div className="mt-3">
                 <p className="text-[14px]">
-                  SKU :<span className="text-gray-400">N/A</span>
+                  SKU :
+                  <span className="text-gray-400"> EDE{product.stock}#DTR</span>
                 </p>
                 <p className="text-[14px]">
-                  Category :<span className="text-gray-400">N/A</span>
+                  Category :
+                  <span className="text-gray-400"> {product.category}</span>
                 </p>
                 <p className="text-[14px]">
-                  subCategory :<span className="text-gray-400">N/A</span>
+                  subCategory :
+                  <span className="text-gray-400"> {product.subCategory}</span>
                 </p>
 
                 {/* social icons */}
@@ -77,13 +105,7 @@ const SingleProduct = () => {
           <div className="md:mt-5 md:w-2/3">
             <h2>Product Description</h2>
 
-            <p>
-              Duis aute irure dolor in reprehenderit in voluptate velit esse
-              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-              cupidatat non proident.Lorem ipsum dolor sit amet, consectetur
-              adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-              dolore magna aliqua.
-            </p>
+            <p>{product.description}</p>
           </div>
 
           {/* Related Products */}

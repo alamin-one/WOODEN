@@ -27,7 +27,11 @@ const Bestselling = () => {
             {!error &&
               !loading &&
               isBestSeller.slice(0, 10).map((pItem, pIndex) => (
-                <Link to={`/singleproduct/${pItem.id}`} key={pIndex}>
+                <Link
+                  to={`/singleproduct/${pItem.id}`}
+                  state={{ pItem,}}
+                  key={pIndex}
+                >
                   <div className="space-y-2.5 group ">
                     <div className="flex justify-center items-center bg-pale-grey rounded-2xl  overflow-hidden">
                       <img
