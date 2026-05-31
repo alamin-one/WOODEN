@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const CategoryFilter = ({ label = 'Clear', isFilterCategoryFN }) => {
+const BrandFilter = ({ label = 'Clear', isFilterBrandFN }) => {
   const [checked, setChecked] = useState(false);
 
   return (
@@ -9,7 +9,7 @@ const CategoryFilter = ({ label = 'Clear', isFilterCategoryFN }) => {
         type="checkbox"
         checked={true}
         onChange={() => {
-          (setChecked(prev => !prev), isFilterCategoryFN(label, checked));
+          (setChecked(prev => !prev), isFilterBrandFN(label, checked));
         }}
         className="hidden"
       />
@@ -39,4 +39,4 @@ const CategoryFilter = ({ label = 'Clear', isFilterCategoryFN }) => {
   );
 };
 
-export default CategoryFilter;
+export default BrandFilter;

@@ -18,6 +18,7 @@ import { MdOutlineWork } from 'react-icons/md';
 import { FaPlus } from 'react-icons/fa';
 import { FaGoogle } from 'react-icons/fa';
 import { IoLogIn } from 'react-icons/io5';
+import { VscSettings } from 'react-icons/vsc';
 
 const icon = {
   user: <FaUser />,
@@ -40,6 +41,7 @@ const icon = {
   pluse: <FaPlus />,
   google: <FaGoogle />,
   logIn: <IoLogIn />,
+  filter: <VscSettings />,
 };
 
 export default icon;
