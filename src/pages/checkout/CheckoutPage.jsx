@@ -4,11 +4,9 @@ import OrderSummery from './COTOrderSummery';
 const CheckoutPage = () => {
   const [address, setAddress] = useState();
 
-  
-
   return (
     <>
-      <section className="bg-pale-grey">
+      <section className="bg-pale-grey min-h-[70vh]">
         <div className="app-container  py-25">
           <div className="flex flex-col md:flex-row gap-5">
             <div className="w-full  md:w-[60%]">

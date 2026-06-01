@@ -1,7 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, Navigate } from 'react-router';
 import { RouterProvider } from 'react-router/dom';
-
 /* page import */
 import App from './App.jsx';
 import HomePage from './pages/home/HomePage.jsx';
@@ -16,12 +15,11 @@ import ErrorPage from './pages/error/ErrorPage.jsx';
 import SignINUP from './pages/auth/SignINUP.jsx';
 import Dashboard from './pages/dashboard/user/Dashboard.jsx';
 import MYOrders from './pages/dashboard/user/MYOrders.jsx';
-import MyWishlist from './pages/dashboard/user/MyWishlist.jsx';
 import MyAddresses from './pages/dashboard/user/MyAddresses.jsx';
-import MySettings from './pages/dashboard/user/MySettings.jsx';
 /* style */
 import './index.css';
 import Maindash from './pages/dashboard/user/Maindash.jsx';
+import PrivetRoutes from './routes/PrivetRoutes.jsx';
 
 /* routing  */
 const router = createBrowserRouter([
@@ -33,14 +31,43 @@ const router = createBrowserRouter([
       { path: '/shop', element: <ShopPage /> },
       { path: '/shop/:category', element: <ShopPage /> },
       { path: '/singleproduct/:id', element: <SingleProduct /> },
-      { path: '/about', element: <About /> },
+      {
+        path: '/about',
+        element: <About />,
+      },
       { path: '/contact', element: <ContactPage /> },
-      { path: '/checkout', element: <CheckoutPage /> },
-      { path: '/cart', element: <CartPage /> },
-      { path: '/my-account', element: <UserDeshboard /> },
+      {
+        path: '/checkout',
+        element: (
+          <PrivetRoutes>
+            <CheckoutPage />
+          </PrivetRoutes>
+        ),
+      },
+      {
+        path: '/cart',
+        element: (
+          <PrivetRoutes>
+            <CartPage />,
+          </PrivetRoutes>
+        ),
+      },
+      {
+        path: '/my-account',
+        element: (
+          <PrivetRoutes>
+            <UserDeshboard />
+          </PrivetRoutes>
+        ),
+      },
       {
         path: '/my-account/',
-        element: <UserDeshboard />,
+        element: (
+          <PrivetRoutes>
+            <UserDeshboard />,
+          </PrivetRoutes>
+        ),
+
         children: [
           {
             path: 'dashboard',
@@ -58,20 +85,11 @@ const router = createBrowserRouter([
           },
           {
             index: true,
-            element: <Navigate to="/my-account/dashboard" replace />, 
-          },
-
-          {
-            path: 'wishlist',
-            element: <MyWishlist />,
+            element: <Navigate to="/my-account/dashboard" replace />,
           },
           {
             path: 'addresses',
             element: <MyAddresses />,
-          },
-          {
-            path: 'settings',
-            element: <MySettings />,
           },
         ],
       },

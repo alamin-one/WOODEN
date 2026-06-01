@@ -5,7 +5,6 @@ const MyAddresses = () => {
     <>
       <div className="bg-white md:bg-pale-grey rounded-xl p-0 md:p-8 relative">
         {/* new address */}
-
         {/* Header */}
         <div className="mb-8 flex  flex-col md:flex-row  justify-between md:items-center">
           <div>

@@ -78,7 +78,9 @@ const QntyCtrl = ({ product }) => {
     <div className="mt-2 w-32 h-8 flex  bg-pale-grey border border-gray-100 rounded-md ">
       <div
         onClick={() => {
-          quantityFn('inc', product);
+          user
+            ? quantityFn('inc', product)
+            : toast.error('You need to be logged in to add items to cart.');
         }}
         className="w-1/3 h-full flex items-center justify-center cursor-pointer"
       >
@@ -88,7 +90,11 @@ const QntyCtrl = ({ product }) => {
         {qty}
       </div>
       <div
-        onClick={() => quantityFn('dec', product)}
+        onClick={() =>
+          user
+            ? quantityFn('dec', product)
+            : toast.error('You need to be logged in to add items to cart.')
+        }
         className="w-1/3 h-full flex items-center justify-center cursor-pointer"
       >
         -

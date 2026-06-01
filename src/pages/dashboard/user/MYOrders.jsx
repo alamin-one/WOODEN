@@ -4,11 +4,8 @@ import useAllOrder from '../../../hooks/useAllOrder';
 
 const MYOrders = () => {
   const { id } = useParams();
-  console.log(id);
-
   const currentOrde = useAllOrder();
   const cp = currentOrde?.find(f => f.id === id);
-  console.log(cp);
 
   return (
     <>
@@ -19,15 +16,6 @@ const MYOrders = () => {
             <h1 className="text-xl font-bold text-deep-aqua">#{cp?.id}</h1>
             <p className="mt-1 text-sm">Lorem ipsum dolor sit.</p>
           </div>
-          {/*  */}
-          {/*             <div className="w-full  p-4 rounded-xl bg-deep-aqua/10 ">
-              <p className="font-bold"> Package in Transit Tracking:</p>
-              <p className="text-gray-400">
-                {' '}
-                TRK-492817305 · Est. delivery: May 24, 2025
-              </p>
-            </div> */}
-
           {/*  */}
           <div className=" mt-10 flex flex-col md:flex-row gap-5">
             <div className="w-full">
@@ -95,7 +83,6 @@ const MYOrders = () => {
                 <span>Total</span>
                 <span>{cp?.total}৳</span>
               </div>
-
               <div className="mt-5 space-y-1">
                 <Button className="w-full">Download Invoice </Button>
                 <Button className="w-full">Request Return </Button>

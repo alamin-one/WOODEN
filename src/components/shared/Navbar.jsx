@@ -22,9 +22,9 @@ const Navbar = () => {
         <div className=" max-w-7xl mx-auto px-5 py-2.5 flex justify-between items-center">
           {/* logo */}
           <Link to={'/'}>
-          <div className="">
-            <img src={logo} alt="logo" className="w-12" />
-          </div>
+            <div className="">
+              <img src={logo} alt="logo" className="w-12" />
+            </div>
           </Link>
           {/* desktop menu */}
           <div className=" hidden md:flex  gap-6">
@@ -43,7 +43,6 @@ const Navbar = () => {
           </div>
           {/*  */}
           <div className=" text-xl text-deep-aqua flex gap-4 items-center">
-            <div>{icon.search}</div>
             <NavLink to={'/cart'}>{icon.cart}</NavLink>
 
             {user ? (
@@ -57,7 +56,7 @@ const Navbar = () => {
             )}
 
             <div onClick={() => setIsopen(prev => !prev)} className="md:hidden">
-              {icon.menu}
+              {isOpen ? icon.close : icon.menu}
             </div>
           </div>
         </div>
@@ -79,7 +78,6 @@ const Navbar = () => {
           </NavLink>
         ))}
       </div>
-      {/* search */}
     </>
   );
 };

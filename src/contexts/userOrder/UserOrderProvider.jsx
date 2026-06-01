@@ -3,7 +3,7 @@ import userOrderContext from './userOrderContext';
 import { collection, getFirestore, onSnapshot } from 'firebase/firestore';
 import app from '../../firebase';
 import { useAuth } from '../auth/AuthContextprovider';
-import toast from 'react-hot-toast';
+
 /* custom hook */
 // eslint-disable-next-line react-refresh/only-export-components
 export const useUserOrder = () => {
@@ -26,15 +26,12 @@ const UserOrderProvider = ({ children }) => {
           ...i.data(),
         }));
         setCartItem(data);
-
       } else {
-        toast.error('employ cart');
+        setCartItem([]);
       }
     });
     return () => uns();
   }, [db, user, userID]);
-
-
 
   const value = {
     cartItem,

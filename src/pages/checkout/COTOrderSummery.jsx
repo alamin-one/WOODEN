@@ -1,18 +1,15 @@
-import { useState } from 'react';
 import Button from '../../components/ui/Button';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import Checkout from '../../components/checkout/Checkout';
 import { useAuth } from '../../contexts/auth/AuthContextprovider';
 import { useUserOrder } from '../../contexts/userOrder/UserOrderProvider';
-
-/*  */
+import toast from 'react-hot-toast';
 
 /*  */
 const OrderSummery = ({ address }) => {
   const { cartItem } = useUserOrder();
   const { user } = useAuth();
   const userId = user?.uid;
-  /*  */
   // const [orderummary, setOrdersummary] = useState();
 
   const subtotal = cartItem?.reduce((acc, item) => {
@@ -23,6 +20,7 @@ const OrderSummery = ({ address }) => {
   const discount = subtotal * d;
   const finalTotal = subtotal - discount || 0;
   const Shipping = 'Free';
+  const navigate = useNavigate();
   /* plase order */
   const plaseOrder = () => {
     Checkout(
@@ -33,11 +31,11 @@ const OrderSummery = ({ address }) => {
       discount,
       Shipping,
       finalTotal,
+      navigate,
     );
   };
-
   return (
-    <div className="w-full max-w-sm bg-white rounded-2xl border border-gray-200 overflow-hidden">
+    <div className="w-full max-w-sm  bg-pale-grey rounded-2xl border border-deep-aqua/30 overflow-hidden">
       {/* Cart Items */}
 
       {cartItem?.map((item, index) => (
@@ -72,10 +70,8 @@ const OrderSummery = ({ address }) => {
         </div>
       ))}
 
-      <div className="h-px bg-gray-100 mx-5" />
-
       {/* Discount Code */}
-      <div className="px-5 py-4 flex items-center gap-2 border-b border-gray-100">
+      <div className="px-5 py-4 flex items-center gap-2 border-b border-deep-aqua/30">
         <div className="flex flex-1 items-center gap-2 border border-gray-200 rounded-lg px-3 py-2.5 w-2/3 ">
           <input
             placeholder="Discount code"
@@ -87,16 +83,16 @@ const OrderSummery = ({ address }) => {
         </Button>
       </div>
 
-      <div className="p-5 flex flex-col gap-3 text-sm text-gray-600">
-        <div className="flex justify-between">
+      <div className="p-5 flex flex-col gap-3 text-sm text-gray-600 pb-2 border-b border-deep-aqua/30">
+        <div className="flex justify-between pb-2 border-b border-deep-aqua/20">
           <span>Subtotal</span>
           <span>{subtotal} ৳</span>
         </div>
-        <div className="flex justify-between">
+        <div className="flex justify-between  pb-2 border-b border-deep-aqua/30">
           <span>{d * 100}%discount </span>
           <span className="font-medium ">- {discount || 0}৳ </span>
         </div>
-        <div className="flex justify-between">
+        <div className="flex justify-between  pb-2 border-b border-deep-aqua/30">
           <span>Shipping</span>
           <span className="font-medium ">{Shipping}</span>
         </div>
@@ -110,10 +106,20 @@ const OrderSummery = ({ address }) => {
         </div>
       </div>
 
-      {/* CTA Button */}
-      <Button onClick={() => plaseOrder()} className="m-5">
-        Plase order
-      </Button>
+      {/* Button */}
+
+      {cartItem?.length === 0 ? (
+        <Button
+          onClick={() => toast.error('Your cart is empty!')}
+          className="m-5"
+        >
+          Plase order
+        </Button>
+      ) : (
+        <Button onClick={() => plaseOrder()} className="m-5">
+          Plase order
+        </Button>
+      )}
     </div>
   );
 };

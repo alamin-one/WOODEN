@@ -10,15 +10,12 @@ import {
   signInWithPopup,
 } from 'firebase/auth';
 import '../../firebase';
-/* local state */
 import { useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-/* import auth context  */
 import AuthContext from './AuthContext';
 import { useNavigate } from 'react-router';
 
 /* custom hook */
-
 // eslint-disable-next-line react-refresh/only-export-components
 export const useAuth = () => {
   return useContext(AuthContext);
@@ -36,6 +33,7 @@ const AuthContextprovider = ({ children }) => {
   useEffect(() => {
     onAuthStateChanged(auth, user => {
       setUser(user);
+      setLoading(false);
     });
   }, [auth]);
 
@@ -66,8 +64,8 @@ const AuthContextprovider = ({ children }) => {
       setLoading(true);
       await signInWithPopup(auth, googleprovider);
       setUser(auth.currentUser);
-      navigate('/my-account');
-      toast.success('Successfully registered!');
+      navigate('/my-account/dashboard');
+      toast.success('Successfully registered & logIn!');
       setLoading(false);
       // eslint-disable-next-line no-unused-vars
     } catch (err) {
@@ -83,7 +81,7 @@ const AuthContextprovider = ({ children }) => {
       setLoading(true);
       await signInWithEmailAndPassword(auth, email, pasword);
       setUser(auth.currentUser);
-      navigate('/my-account');
+      navigate('/my-account/dashboard');
       toast.success('Successfully logIn');
       setLoading(false);
       // eslint-disable-next-line no-unused-vars

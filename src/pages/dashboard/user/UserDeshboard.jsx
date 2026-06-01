@@ -1,16 +1,15 @@
 import { NavLink, Outlet } from 'react-router';
-import icon from '../../../assets/icons/icon';
 import { useAuth } from '../../../contexts/auth/AuthContextprovider';
+import icon from '../../../assets/icons/icon';
 
 const UserDeshboard = () => {
   const { user, signOutFN } = useAuth();
-
   const userDash = [
     { title: 'Dashboard', icon: icon.dashboard, path: '/my-account/dashboard' },
     // { title: 'My Orders', icon: icon.user, path: '/my-account/orders' },
-    { title: 'Wishlist', icon: icon.heartSodil, path: '/my-account/wishlist' },
+    // { title: 'Wishlist', icon: icon.heartSodil, path: '#' },
     { title: 'Addresses', icon: icon.location, path: '/my-account/addresses' },
-    { title: 'Settings', icon: icon.seting, path: '/my-account/settings' },
+    // { title: 'Settings', icon: icon.seting, path: '/my-account/settings' },
   ];
   const capitalize = str => str?.charAt(0).toUpperCase();
   const firstLetter = capitalize(user?.displayName ? user?.displayName : '!');
@@ -55,7 +54,6 @@ const UserDeshboard = () => {
                     {l.icon} {l.title}
                   </NavLink>
                 ))}
-
                 <div
                   onClick={signOutFN}
                   className="flex justify-start items-center gap-1 px-3 py-2 border-b text-gray-500 text-[14px] border-gray-100 rounded-md bg-white hover:bg-[#E7F5F3] cursor-pointer "

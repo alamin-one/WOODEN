@@ -33,9 +33,6 @@ const UDashboard = () => {
             Here's what's happening with your account today.
           </p>
         </div>
-
-        {/* */}
-
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           <StatCard label="Total Orders" value="24" sub="↑ 3 this month" />
           <StatCard
@@ -46,7 +43,6 @@ const UDashboard = () => {
           <StatCard label="Wishlist Items" value="4" />
           <StatCard label="Reward Points" value="1,840" sub="= $18.40 value" />
         </div>
-
         {/* Orders Table */}
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
           <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
@@ -59,10 +55,7 @@ const UDashboard = () => {
 
           <OrdertabileDesktop currentOrder={currentOrder} />
           {/* mobile */}
-          <OrderTabileMobile />
-
-          
-          
+          <OrderTabileMobile currentOrder={currentOrder} />
         </div>
       </div>
     </>

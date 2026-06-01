@@ -7,15 +7,16 @@ import {
 } from 'firebase/firestore';
 import app from '../../firebase';
 import toast from 'react-hot-toast';
+
 const Checkout = async (
-  userId,
-  address,
-  cartItem,
-  subtotal,
-  discount,
-  Shipping,
-  finalTotal,
+  userId,address,cartItem,subtotal,discount,Shipping,finalTotal,navigate,
 ) => {
+  const { firstName, lastName, email, phone, city, zip } = address;
+  if (!firstName || !lastName || !email || !phone || !city || !zip) {
+    toast.error('Please fill in all required  Address fields!');
+    return;
+  }
+
   const orderDetls = {
     userId: userId,
     status: 'pending',
@@ -50,8 +51,10 @@ const Checkout = async (
   };
   const db = getFirestore(app);
   const docFef = collection(db, 'orders');
-  await addDoc(docFef, orderDetls);
+  const order = await addDoc(docFef, orderDetls);
+  const orderID = order.id;
   toast.success('Order Placed Successfully');
+  navigate(`/my-account/dashboard/orders/${orderID}`);
 
   const deleteC = cartItem.map(p =>
     deleteDoc(doc(db, 'users', userId, 'cart', p.id)),

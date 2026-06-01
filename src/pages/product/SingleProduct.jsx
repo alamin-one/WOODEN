@@ -1,10 +1,13 @@
 import { useLocation, useParams } from 'react-router';
+import { useDbcontext } from '../../contexts/dB/DbContextprovider';
 import Button from '../../components/ui/Button';
+import { useAuth } from '../../contexts/auth/AuthContextprovider';
 import QntyCtrl from '../cart/QntyCtrl';
 import rating from '../../utils/Rating';
-import { useDbcontext } from '../../contexts/dB/DbContextprovider';
+import toast from 'react-hot-toast';
 
 const SingleProduct = () => {
+  const { user } = useAuth();
   const { products, adToCartFN } = useDbcontext();
   const { state } = useLocation();
   const { id } = useParams();
@@ -68,11 +71,30 @@ const SingleProduct = () => {
                   <span className="text-deep-aqua"> {product.stock}</span>
                 </p>
               </div>
-              <Button onClick={() => adToCartFN(product)} className="mt-8 mb-2">
-                AddToCart
-              </Button>
+
+              {user ? (
+                <Button
+                  onClick={() => adToCartFN(product)}
+                  className="mt-8 mb-2"
+                >
+                  AddToCart
+                </Button>
+              ) : (
+                <Button
+                  onClick={() =>
+                    toast.error(
+                      'You need to be logged in to add items to cart.',
+                    )
+                  }
+                  className="mt-8 mb-2"
+                >
+                  AddToCart
+                </Button>
+              )}
+
               <div className="flex gap-4 items-center">
                 <QntyCtrl product={product} />
+
                 <p className="text-[14px]">
                   stock:
                   <span className="text-deep-aqua"> {product.stock}</span>
@@ -110,7 +132,6 @@ const SingleProduct = () => {
           {/* Related Products */}
           <div className="mt-8">
             <h4 className="cart text-Almost-black">Related Products</h4>
-
             {/* product container */}
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
               {/* product card */}

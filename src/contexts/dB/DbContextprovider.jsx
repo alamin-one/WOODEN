@@ -1,18 +1,13 @@
 import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  getFirestore,
-  increment,
-  setDoc,
-  updateDoc,
+  collection,doc,getDoc,getDocs,getFirestore,increment,setDoc,updateDoc,
 } from 'firebase/firestore';
 import app from '../../firebase';
 import { useContext, useEffect, useState } from 'react';
 import dbContext from './dbContext';
 import { useAuth } from '../auth/AuthContextprovider';
 import toast from 'react-hot-toast';
+
+
 /* custom hook */
 // eslint-disable-next-line react-refresh/only-export-components
 export const useDbcontext = () => {
@@ -24,11 +19,9 @@ const DbContextprovider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [products, setProducts] = useState(null);
-
   const [catLoading, setCatLoading] = useState(true);
   const [catError, setCatError] = useState(false);
   const [category, setCategory] = useState(null);
-
 
   const db = getFirestore(app);
   const { user } = useAuth();
@@ -81,7 +74,6 @@ const DbContextprovider = ({ children }) => {
   const adToCartFN = async product => {
     let docRef = doc(db, 'users', userID, 'cart', product.id);
     const snapshort = await getDoc(docRef);
-
     if (snapshort.exists()) {
       toast.error('Product Already Added, Quantity Updated!');
       await updateDoc(docRef, {
@@ -104,13 +96,7 @@ const DbContextprovider = ({ children }) => {
 
   /* provide value */
   const value = {
-    error,
-    loading,
-    products,
-    catError,
-    catLoading,
-    category,
-    adToCartFN,
+    error,loading,products,catError,catLoading,category,adToCartFN,
   };
   return <dbContext.Provider value={value}>{children}</dbContext.Provider>;
 };

@@ -1,20 +1,21 @@
-import QntyCtrl from './QntyCtrl';
-import icon from '../../assets/icons/icon';
 import { deleteDoc, doc, getFirestore } from 'firebase/firestore';
 import app from '../../firebase';
 import { useAuth } from '../../contexts/auth/AuthContextprovider';
+import QntyCtrl from './QntyCtrl';
+import icon from '../../assets/icons/icon';
+
+/*  */
 const CartItem = ({ product }) => {
   const { user } = useAuth();
   const userID = user?.uid;
   const db = getFirestore(app);
   const docRef = doc(db, 'users', userID, 'cart', product.id);
-
   const deleteP = () => {
     deleteDoc(docRef);
   };
 
   return (
-    <div className="bg-white border border-gray-200 rounded-2xl p-4 flex  flex-col md:flex-row justify-between items-center gap-4">
+    <div className="bg-pale-grey/25 border border-gray-200 rounded-2xl p-4 flex  flex-col md:flex-row justify-between items-center gap-4">
       <div className="w-full flex justify-between items-center gap-5">
         <img
           src={product.thumbnail}
@@ -35,14 +36,12 @@ const CartItem = ({ product }) => {
           </p>
         </div>
       </div>
-
       <div className="w-full flex justify-between items-center gap-5">
         <QntyCtrl product={product} />
 
         <p className="text-sm font-bold text-gray-900 w-20 text-right">
           {product.price}৳
         </p>
-
         <button
           onClick={deleteP}
           className="ml-1 text-gray-300 hover:text-red-400"

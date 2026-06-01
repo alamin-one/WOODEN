@@ -22,6 +22,7 @@ import { VscSettings } from 'react-icons/vsc';
 import { IoIosStarOutline } from 'react-icons/io';
 import { IoIosStar } from 'react-icons/io';
 import { RiDeleteBin6Line } from 'react-icons/ri';
+import { RiCloseLargeFill } from 'react-icons/ri';
 
 const icon = {
   user: <FaUser />,
@@ -48,6 +49,7 @@ const icon = {
   starB: <IoIosStarOutline className="text-yellow-300" />,
   starF: <IoIosStar className="text-yellow-600" />,
   delet: <RiDeleteBin6Line />,
+  close: <RiCloseLargeFill />,
 };
 
 export default icon;
