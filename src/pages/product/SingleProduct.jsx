@@ -11,10 +11,9 @@ const SingleProduct = () => {
   const product = state?.pItem || products?.find(f => f.id === id);
   const ratings = rating(product?.rating);
 
-  console.log(id);
-
   /*  */
-  if (!product) return <div className="app-container  py-25 h-screen" >Loading...</div>;
+  if (!product)
+    return <div className="app-container  py-25 h-screen">Loading...</div>;
   return (
     <>
       <section>

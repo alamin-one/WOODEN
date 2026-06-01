@@ -21,6 +21,7 @@ import { IoLogIn } from 'react-icons/io5';
 import { VscSettings } from 'react-icons/vsc';
 import { IoIosStarOutline } from 'react-icons/io';
 import { IoIosStar } from 'react-icons/io';
+import { RiDeleteBin6Line } from 'react-icons/ri';
 
 const icon = {
   user: <FaUser />,
@@ -44,8 +45,9 @@ const icon = {
   google: <FaGoogle />,
   logIn: <IoLogIn />,
   filter: <VscSettings />,
-  starB: <IoIosStarOutline className='text-yellow-300' />,
-  starF: <IoIosStar  className='text-yellow-600'/>,
+  starB: <IoIosStarOutline className="text-yellow-300" />,
+  starF: <IoIosStar className="text-yellow-600" />,
+  delet: <RiDeleteBin6Line />,
 };
 
 export default icon;

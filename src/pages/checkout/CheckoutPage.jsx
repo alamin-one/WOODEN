@@ -1,6 +1,11 @@
+import { useState } from 'react';
 import CheckForm from './CheckForm';
-import OrderSummery from './OrderSummery';
+import OrderSummery from './COTOrderSummery';
 const CheckoutPage = () => {
+  const [address, setAddress] = useState();
+
+  
+
   return (
     <>
       <section className="bg-pale-grey">
@@ -9,13 +14,13 @@ const CheckoutPage = () => {
             <div className="w-full  md:w-[60%]">
               <div className="space-y-2.5">
                 <h4>Shipping Address</h4>
-                <CheckForm />
+                <CheckForm setAddress={setAddress} />
               </div>
               <div className=""></div>
             </div>
             <div className="w-full  md:w-[40%] space-y-2.5">
               <h4>Your Order</h4>
-              <OrderSummery />
+              <OrderSummery address={address} />
             </div>
           </div>
         </div>

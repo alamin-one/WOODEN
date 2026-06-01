@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-const CheckForm = () => {
+const CheckForm = ({ setAddress }) => {
   const [form, setForm] = useState({
     firstName: '',
     lastName: '',
@@ -11,7 +11,10 @@ const CheckForm = () => {
     description: '',
   });
 
-  
+  useEffect(() => {
+    setAddress(form);
+  }, [form, setAddress]);
+
   const inputClass =
     'w-full px-3.5 py-2.5 text-sm text-gray-900 bg-white border border-gray-200 rounded-lg outline-none transition-colors focus:border-teal-700 placeholder:text-gray-400';
 
