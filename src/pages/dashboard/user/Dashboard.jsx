@@ -1,7 +1,8 @@
 import { Link } from 'react-router';
 import OrderTabileMobile from './OrderTabileMobile';
 import OrdertabileDesktop from './OrdertabileDesktop';
-
+import { useAuth } from '../../../contexts/auth/AuthContextprovider';
+import useAllOrder from '../../../hooks/useAllOrder';
 function StatCard({ label, value, sub }) {
   return (
     <div className=" rounded-2xl border border-deep-aqua/20 p-5 flex flex-col gap-1 ">
@@ -17,13 +18,16 @@ function StatCard({ label, value, sub }) {
 }
 
 const UDashboard = () => {
+  const currentOrder = useAllOrder();
+  const { user } = useAuth();
+
   return (
     <>
       <div className="bg-white md:bg-pale-grey rounded-xl p-0 md:p-8">
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-deep-aqua">
-            Welcome back, John!
+            Welcome back, {user?.displayName}!
           </h1>
           <p className="mt-1 text-sm">
             Here's what's happening with your account today.
@@ -52,9 +56,13 @@ const UDashboard = () => {
             </Link>
           </div>
           {/* desktop */}
-          <OrdertabileDesktop />
+
+          <OrdertabileDesktop currentOrder={currentOrder} />
           {/* mobile */}
           <OrderTabileMobile />
+
+          
+          
         </div>
       </div>
     </>

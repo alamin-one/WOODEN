@@ -7,15 +7,13 @@ const UserDeshboard = () => {
 
   const userDash = [
     { title: 'Dashboard', icon: icon.dashboard, path: '/my-account/dashboard' },
-    { title: 'My Orders', icon: icon.user, path: '/my-account/orders' },
+    // { title: 'My Orders', icon: icon.user, path: '/my-account/orders' },
     { title: 'Wishlist', icon: icon.heartSodil, path: '/my-account/wishlist' },
     { title: 'Addresses', icon: icon.location, path: '/my-account/addresses' },
     { title: 'Settings', icon: icon.seting, path: '/my-account/settings' },
   ];
   const capitalize = str => str?.charAt(0).toUpperCase();
-  const firstLetter = capitalize(
-    user?.displayName ? user?.displayName : '!',
-  );
+  const firstLetter = capitalize(user?.displayName ? user?.displayName : '!');
 
   const photoURL = user?.photoURL
     ? user.photoURL
@@ -30,7 +28,12 @@ const UserDeshboard = () => {
             <div className="w-full m-h-80 rounded-md bg-white border border-pale-grey">
               <div className="flex gap-2 p-4 border-b border-deep-aqua/20 bg-pale-grey">
                 {' '}
-                <img src={photoURL} alt="" className="rounded-full w-10 h-10" />
+                <img
+                  src={photoURL}
+                  referrerPolicy="no-referrer"
+                  alt={photoURL}
+                  className="rounded-full w-10 h-10"
+                />
                 <span>
                   <p className="text-md font-bold text-deep-aqua">
                     {user?.displayName}
@@ -63,7 +66,7 @@ const UserDeshboard = () => {
             </div>
           </div>
           {/* content */}
-          <div className="w-full h-screen bg-white">
+          <div className="w-full min-h-screen bg-white">
             <Outlet />
           </div>
         </div>

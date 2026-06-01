@@ -1,14 +1,6 @@
 import { Link } from 'react-router';
 
-const orders = [
-  {
-    id: '#WT-2024-089',
-    date: 'May 18, 2025',
-    item: 'VintageNest Armchair',
-    total: '$120.00',
-    status: 'Delivered',
-  },
-];
+
 
 const table = ['Order ID', 'Date', 'Items', 'Total', 'Status', 'Action'];
 
@@ -17,7 +9,8 @@ const statusStyles = {
   Shipped: 'bg-sky-100 text-sky-700',
   Processing: 'bg-amber-100 text-amber-700',
 };
-const OrdertabileDesktop = () => {
+const OrdertabileDesktop = ({ currentOrder }) => {
+  console.log(currentOrder)
   return (
     <div className=" w-full hidden lg:block">
       <table className="w-full ">
@@ -34,16 +27,18 @@ const OrdertabileDesktop = () => {
           </tr>
         </thead>
         <tbody>
-          {orders.map((o, i) => (
+          {currentOrder?.map((o, i) => (
             <tr
               key={i}
               className={`border-t border-gray-50 transition-colors `}
             >
-              <td className="px-6 py-4 text-sm font-semibold text-gray-700">
-                {o.id}
+              <td className="px-6 py-4 text-sm font-medium text-gray-600">
+                #{o.id}
               </td>
               <td className="px-6 py-4 text-sm text-gray-500">{o.date}</td>
-              <td className="px-6 py-4 text-sm text-gray-700">{o.item}</td>
+              <td className="px-6 py-4 text-sm text-gray-700">
+                {o.items.length}
+              </td>
               <td className="px-6 py-4 text-sm font-semibold text-gray-800">
                 {o.total}
               </td>
@@ -55,7 +50,10 @@ const OrdertabileDesktop = () => {
                 </span>
               </td>
               <td className="px-6 py-4">
-                <Link className="text-sm font-medium text-teal-600 hover:text-teal-700 transition-colors">
+                <Link
+                  to={`orders/${o.id}`}
+                  className="text-sm font-medium text-teal-600 hover:text-teal-700 transition-colors"
+                >
                   View
                 </Link>
               </td>

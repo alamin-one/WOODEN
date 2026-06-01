@@ -1,5 +1,5 @@
 import { createRoot } from 'react-dom/client';
-import { createBrowserRouter } from 'react-router';
+import { createBrowserRouter, Navigate } from 'react-router';
 import { RouterProvider } from 'react-router/dom';
 
 /* page import */
@@ -21,6 +21,7 @@ import MyAddresses from './pages/dashboard/user/MyAddresses.jsx';
 import MySettings from './pages/dashboard/user/MySettings.jsx';
 /* style */
 import './index.css';
+import Maindash from './pages/dashboard/user/Maindash.jsx';
 
 /* routing  */
 const router = createBrowserRouter([
@@ -43,16 +44,23 @@ const router = createBrowserRouter([
         children: [
           {
             path: 'dashboard',
-            element: <Dashboard />,
+            element: <Maindash />,
+            children: [
+              {
+                index: true,
+                element: <Dashboard />,
+              },
+              {
+                path: 'orders/:id',
+                element: <MYOrders />,
+              },
+            ],
           },
           {
             index: true,
-            element: <Dashboard />,
+            element: <Navigate to="/my-account/dashboard" replace />, 
           },
-          {
-            path: 'orders',
-            element: <MYOrders />,
-          },
+
           {
             path: 'wishlist',
             element: <MyWishlist />,
