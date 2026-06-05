@@ -4,7 +4,7 @@ A full-stack furniture e-commerce web app built with React and Firebase.
 
 ## Live Demo
 
-[wooden-furniture.vercel.app](#)
+[Live Preview](https://alamin-wooden.vercel.app/)
 
 ---
 
