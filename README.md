@@ -136,7 +136,7 @@ http://localhost:5173
 
 ## Screenshot
 
-![Wooden](https://github.com/alamin-one/WOODEN/blob/master/public/wooden.png)
+![Wooden](./public/wooden.webp)
 
 ---
 
