@@ -46,16 +46,16 @@ const Navbar = () => {
             <NavLink to={'/cart'}>{icon.cart}</NavLink>
 
             {user ? (
-              <NavLink className="text-[20px]" to={'/my-account'}>
+              <NavLink className="text-[22px]" to={'/my-account'}>
                 {icon.user}
               </NavLink>
             ) : (
-              <NavLink className="text-[20px]" to={'/login'}>
+              <NavLink className="text-[22px]" to={'/login'}>
                 {icon.logIn}
               </NavLink>
             )}
 
-            <div onClick={() => setIsopen(prev => !prev)} className="md:hidden text-[20px]">
+            <div onClick={() => setIsopen(prev => !prev)} className="md:hidden text-[22px]">
               {isOpen ? icon.close : icon.menu}
             </div>
           </div>
